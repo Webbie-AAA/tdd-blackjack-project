@@ -3,16 +3,6 @@
 
 def generate_card(suit: str, number: str) -> str:
     """Generates a card based on the suit and number. (e.g. 8C) Should return an "Error" message if the suit or number is invalid."""
-    # if type(number) == str and type(suit) == str:
-    #     if number != "" and suit != "":
-    #         if number not in [2,3,4,5,6,7,8,9,10]:
-    #             return
-    #         else:
-    #             return number + suit
-    #     else:
-    #         return "Error. Empty string"
-    # else:
-    #     return "Error. Invalid input"
     if type(number) != str or type(suit) != str:
         return "Error. Invalid input"
     elif number == "" or suit == "":
