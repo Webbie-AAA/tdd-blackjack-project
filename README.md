@@ -1,56 +1,39 @@
-[![badge](./.github/badges/code_quality.svg)](./code_review/report.json)
-[![badge](./.github/badges/total_errors.svg)](./code_review/report.json)
+# Blackjack TDD Project
 
-# 🧑‍💻 Sigma Labs Coursework
+A command-line game of blackjack in Python, built using **test-driven development (TDD)** and checked with **pylint**.
 
-## 🛠️ Getting Setup
+This was part of a class on learning how to build blackjack. I've since gone back and rewritten the main game code from memory to revise the concepts and test my own ability.
 
-1. **Fork** this Repository to your Github Account
-2. **Enable Workflows** on your cloned Repository. See the below image for how to do this.
-3. **Clone** your Repository to your laptop
-4. **Open** this folder in VSCode
+## About the tests
 
-<img width="700px" src="https://i.imgur.com/eGyISm9.png" />
+There are two sets of tests:
 
-## 🗂️ Files Explained
+- **Coach tests:** written by the teachers, which I had to complete and make pass
+- **Trainee tests:** written by me
 
-In this Repository you will find all of the materials for this week of the course.
+A seeded shuffle makes the game testable. The same seed always produces the same deck, so tests can check exact outcomes:
 
-As well as your coursework files you'll find some additional files
+```python
+def shuffle(deck: list, seed: int) -> list[str]:
+    """Randomises a deck of cards"""
+    copy_of_deck = deck.copy()
+    Random(seed).shuffle(copy_of_deck)
+    return copy_of_deck
+```
 
-- `README.md`
-  - This is the file you are currently reading
-- `.gitignore`
-  - This file is used to tell Git what files to ignore for any changes. This can be safely ignored.
-- `.prettierrc`
-  - This file is used to configure Prettier, an automated formatter that we suggest you install. This can be safely ignored.
-- `.eslintrc.json` and `pylintrc`
-  - Used to ensure that your code is following good style guides
+The game returns three possible results: `"You win!"`, `"You lose!"` and `"Draw!"`.
 
-You'll also find some folders:
+## Running the project
 
-- `.utils` folder
-  - Some config files to help us to test your code
-- `.github` folder
-  - Configuration files used by Github
-- `code_review` folder
-  - Outputs of our automated code reviews. [See below](#code-review-folder) for more details.
-- `.vscode` folder
-  - This folder contains settings and config files for VSCode. They can be safely ignored.
+```bash
+python blackjack.py
+pytest
+pylint blackjack.py
+```
 
-Any other files or folder found here **are** relevant for your coursework.
+## What I practised
 
-## ✅ Code Review Folder
-
-Every time you commit your code to Github, we will run a suite of tests to ensure that you code is of high quality.
-
-It's worth noting - this **does not evaluate the quality of your solution**. Think of it as evaluating the 'grammar' and 'spelling' of your code rather than the actual quality of the work you've done.
-
-Inside this folder you'll find two files
-
-- `report.txt`
-  - A plain text version of your code quality
-- `report.json`
-  - A computer-friendly version of your code quality, including your 'Code Quality Score'
-
-Consistently keeping your score high will make your code easier to read and understand.
+- Test-driven development: writing tests first, then code to pass them
+- Making random behaviour testable with seeds
+- Code quality and style with pylint
+- Writing code from memory to check my understanding
